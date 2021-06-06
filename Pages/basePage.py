@@ -71,5 +71,9 @@ class BasePage():
             alphabet = string.ascii_letters + string.digits
             value = ''.join(secrets.choice(alphabet) for i in range(length))
             return value
+        elif content_type.lower() == 'all_characters':
+            alphabet = string.printable + string.digits
+            value = ''.join(secrets.choice(alphabet) for i in range(length))
+            return value
         else:
             raise Exception('No such content type.')

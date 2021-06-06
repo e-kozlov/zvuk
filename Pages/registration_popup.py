@@ -1,4 +1,6 @@
 from Pages.basePage import BasePage
+from selenium.webdriver import ActionChains
+from selenium.webdriver.common.keys import Keys
 
 
 class RegistrationPopup(BasePage):
@@ -9,8 +11,10 @@ class RegistrationPopup(BasePage):
     pass_field = ('XPATH', './/div[@id = "modal-root"]//input[@type = "password"]')
     login_button = ('XPATH', './/button[@type = "submit"]')
     conditions_checkbox = ('XPATH', './/label[@for = "tos"]//div')
+    error_empty_email = ('XPATH', './/span[text()= "Электронная почта обязательна для заполнения"]')
     error_not_an_email = ('XPATH', './/span[text()= "Введите электронную почту"]')
     error_wrong_email = ('XPATH', './/p[text()= "Проверьте, нет ли опечаток в адресе или пароле"]')
+    error_empty_pass = ('XPATH', './/span[text()= "Поле обязательно для заполнения"]')
 
     def click_login_button(self):
         self.click(self.login_form_button)
@@ -33,7 +37,10 @@ class RegistrationPopup(BasePage):
     def send_data_by_button(self):
         self.click(self.login_button)
 
-    def enter_pass(self, content_type, length):
+    def send_data_by_enter_key(self):
+        ActionChains.key_down(Keys.ENTER).send_keys('c').key_up(Keys.ENTER).perform()
+
+    def enter_generated_pass(self, content_type, length):
         value = self.generate_velue(content_type, length)
         pass_field = self.find(self.pass_field)
         self.type_text(pass_field, value)
@@ -54,8 +61,18 @@ class RegistrationPopup(BasePage):
         email_field = self.find(self.email_field)
         self.type_text(email_field, text)
 
-    def wait_for_not_an_email_error(self):
-        self.wait_for_element_to_appear(self.error_wrong_email)
+    def enter_pass(self, text):
+        password_field = self.find(self.pass_field)
+        self.type_text(password_field, text)
 
     def wait_for_wrong_email_error(self):
+        self.wait_for_element_to_appear(self.error_wrong_email)
+
+    def wait_for_not_email_error(self):
         self.wait_for_element_to_appear(self.error_not_an_email)
+
+    def wait_for_empty_email_error(self):
+        self.wait_for_element_to_appear(self.error_empty_email)
+
+    def wait_for_empty_pass_error(self):
+        self.wait_for_element_to_appear(self.error_empty_pass)
