@@ -1,4 +1,6 @@
 from Pages.basePage import BasePage
+import string
+import secrets
 
 
 class RegistrationPopup(BasePage):
@@ -28,14 +30,16 @@ class RegistrationPopup(BasePage):
     def accept_conditions(self):
         self.click(self.conditions_checkbox)
 
-    def enter_random_pass(self, length):
-        password = self.generate_random_value(length)
-        pass_field = self.find(self.pass_field)
-        self.type_text(pass_field, password)
-
-    def enter_valid_eng_email(self):
-        email = self.generate_random_value(12) + '@mailinator.com'
-        self.type_text(self.find(self.email_field), email)
-
     def send_data_by_button(self):
         self.click(self.login_button)
+
+    def enter_pass(self, content_type, length):
+        value = self.generate_velue(content_type, length)
+        pass_field = self.find(self.pass_field)
+        self.type_text(pass_field, value)
+
+    def enter_email(self, content_type, length):
+        value = self.generate_velue(content_type, length)
+        email = value + '@' + value + '.com'
+        email_field = self.find(self.email_field)
+        self.type_text(email_field, email)

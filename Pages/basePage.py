@@ -50,7 +50,26 @@ class BasePage():
     def type_text(self, element, text):
         element.send_keys(text)
 
-    def generate_random_value(self, length):
-        alphabet = string.ascii_letters + string.digits
-        password = ''.join(secrets.choice(alphabet) for i in range(length))
-        return password
+    # ----------------------------------
+    # Generate different texts
+    # ----------------------------------
+
+    def generate_velue(self, content_type, length):
+        if content_type.lower() == 'upper_case':
+            alphabet = string.ascii_uppercase
+            value = ''.join(secrets.choice(alphabet) for i in range(length))
+            return value
+        elif content_type.lower() == 'lower_case':
+            alphabet = string.ascii_lowercase
+            value = ''.join(secrets.choice(alphabet) for i in range(length))
+            return value
+        elif content_type.lower() == 'digits':
+            alphabet = string.digits
+            value = ''.join(secrets.choice(alphabet) for i in range(length))
+            return value
+        elif content_type.lower() == 'letters + digits':
+            alphabet = string.ascii_letters + string.digits
+            value = ''.join(secrets.choice(alphabet) for i in range(length))
+            return value
+        else:
+            raise Exception('No such content type.')
