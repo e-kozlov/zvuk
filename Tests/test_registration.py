@@ -20,3 +20,4 @@ class TestRegistration:
         registration_popup.enter_valid_eng_email()
         registration_popup.send_data_by_button()
         dashboard.wait_for_login()
+        sleep(2)
