@@ -1,6 +1,4 @@
 from Pages.basePage import BasePage
-import string
-import secrets
 
 
 class RegistrationPopup(BasePage):
@@ -11,6 +9,8 @@ class RegistrationPopup(BasePage):
     pass_field = ('XPATH', './/div[@id = "modal-root"]//input[@type = "password"]')
     login_button = ('XPATH', './/button[@type = "submit"]')
     conditions_checkbox = ('XPATH', './/label[@for = "tos"]//div')
+    error_not_an_email = ('XPATH', './/span[text()= "Введите электронную почту"]')
+    error_wrong_email = ('XPATH', './/p[text()= "Проверьте, нет ли опечаток в адресе или пароле"]')
 
     def click_login_button(self):
         self.click(self.login_form_button)
@@ -38,8 +38,24 @@ class RegistrationPopup(BasePage):
         pass_field = self.find(self.pass_field)
         self.type_text(pass_field, value)
 
-    def enter_email(self, content_type, length):
+    def enter_generated_email(self, content_type, length):
         value = self.generate_velue(content_type, length)
         email = value + '@' + value + '.com'
         email_field = self.find(self.email_field)
         self.type_text(email_field, email)
+
+    def enter_email_with_special_characters(self):
+        value = self.generate_velue('lower_case', 5)
+        email = value + '.dot-hyphen_underscore+posfix@email.with-subdomain.com'
+        email_field = self.find(self.email_field)
+        self.type_text(email_field, email)
+
+    def enter_email(self, text):
+        email_field = self.find(self.email_field)
+        self.type_text(email_field, text)
+
+    def wait_for_not_an_email_error(self):
+        self.wait_for_element_to_appear(self.error_wrong_email)
+
+    def wait_for_wrong_email_error(self):
+        self.wait_for_element_to_appear(self.error_not_an_email)
