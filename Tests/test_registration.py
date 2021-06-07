@@ -108,7 +108,7 @@ class TestRegistration:
     # Send form by 'Enter' key
     # ----------------------------------
 
-    # TODO
+    # TODO - send by pressing Enter key
     @pytest.mark.xfail
     def test_send_form_by_enter_button(self, registration_popup, dashboard, open_registration_popup_and_enter_email):
         registration_popup.enter_generated_pass('lower_case', 12)
