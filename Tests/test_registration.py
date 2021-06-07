@@ -1,4 +1,5 @@
 import pytest
+from time import sleep
 
 
 @pytest.fixture()
