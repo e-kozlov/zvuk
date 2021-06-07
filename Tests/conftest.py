@@ -3,6 +3,7 @@ from selenium import webdriver
 from Configs.config import TestData
 from Pages.registration_popup import RegistrationPopup
 from Pages.top_dashboard import TopDashboard
+from Pages.search_field import SearchField
 
 
 @pytest.fixture()
@@ -22,3 +23,8 @@ def registration_popup(driver):
 @pytest.fixture()
 def dashboard(driver):
     return TopDashboard(driver)
+
+
+@pytest.fixture()
+def searh(driver):
+    return SearchField(driver)
