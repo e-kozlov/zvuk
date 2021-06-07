@@ -5,4 +5,5 @@
 #
 #
 # !!! Если тесты не запускаются, обновите/установите последнюю версию Chrome
-# !!! и закиньте соответствующую версию chromedriver.exe в  папку Components.
+# !!! и закиньте соответствующую версию chromedriver.exe (скачать отсюда - https://chromedriver.chromium.org/downloads)
+# !!! в папку Components.
