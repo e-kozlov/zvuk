@@ -26,5 +26,5 @@ def dashboard(driver):
 
 
 @pytest.fixture()
-def searh(driver):
+def search(driver):
     return SearchField(driver)
