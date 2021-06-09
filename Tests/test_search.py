@@ -13,7 +13,7 @@ class TestSearch:
         search.wait_fot_suggests_to_hide()
 
     def test_suggests_with_min_text_length(self, click_in_search_field, search):
-        search.enter_generated_search_request('all_characters', 3)
+        search.enter_generated_search_request('lower_case', 3)
         search.wait_for_suggest_to_appear()
 
     def test_search_without_results(self, click_in_search_field, search):
