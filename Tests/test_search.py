@@ -20,18 +20,27 @@ class TestSearch:
         search.type_search_request('Totally without results for sure')
         search.wait_fot_suggests_to_hide()
 
-    # TODO - make search case insensetive
+    # TODO - make search case insensitive
     @pytest.mark.parametrize("artist", [('Цой'), ('Sleaford Mods'), ('Maroon 5'), ('#####'), ('平沢進')])
-    def test_search_by_artist(self, click_in_search_field, search, artist):
+    def test_search_by_artist(self, click_in_search_field, search, details, artist):
         search.type_search_request(artist)
         search.wait_for_artist_to_appear(artist)
+        search.click_on_artist(artist)
+        details.check_artist(artist)
 
+    # TODO - make search case insensitive
+    # TODO - fails sometimes with different data when search suggest flicks
     @pytest.mark.parametrize("track", [("Птичка"), ("Fitter Happier"), ("Room 138"), ("L'été indien")])
-    def test_search_by_track(self, click_in_search_field, search, track):
+    def test_search_by_track(self, click_in_search_field, search, details, track):
         search.type_search_request(track)
         search.wait_for_track_to_appear(track)
+        search.click_on_track(track)
+        details.check_track(track)
 
+    # TODO - make search case insensitive
     @pytest.mark.parametrize("album", [("Птичка"), ("Master Of Puppets"), ("Hot & Slow - Best Masters Of The 70's")])
-    def test_search_by_album(self, click_in_search_field, search, album):
+    def test_search_by_album(self, click_in_search_field, search, details, album):
         search.type_search_request(album)
         search.wait_for_album_to_appear(album)
+        search.click_on_album(album)
+        details.check_album(album)

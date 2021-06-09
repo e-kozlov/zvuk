@@ -4,6 +4,7 @@ from Configs.config import TestData
 from Pages.registration_popup import RegistrationPopup
 from Pages.top_dashboard import TopDashboard
 from Pages.search_field import SearchField
+from Pages.details_page import DetailsPage
 
 
 @pytest.fixture()
@@ -28,3 +29,8 @@ def dashboard(driver):
 @pytest.fixture()
 def search(driver):
     return SearchField(driver)
+
+
+@pytest.fixture()
+def details(driver):
+    return DetailsPage(driver)

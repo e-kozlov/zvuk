@@ -28,6 +28,25 @@ class BasePage():
         else:
             raise Exception("Can't find such finding method.")
 
+    def find_element_with_pasted_data(self, element_data, pasted_data):
+        wait = WebDriverWait(self.driver, 15)
+        find_method = element_data[0]
+        locator = element_data[1].format(pasted_data)
+        if find_method.upper() == 'XPATH':
+            wait.until(EC.visibility_of_element_located((By.XPATH, locator)))
+            return self.driver.find_element(By.XPATH, locator)
+        elif find_method.upper() == 'CSS_SELECTOR':
+            wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, locator)))
+            return self.driver.find_element(By.CSS_SELECTOR, locator)
+        elif find_method.upper() == 'CLASS_NAME':
+            wait.until(EC.visibility_of_element_located((By.CLASS_NAME, locator)))
+            return self.driver.find_element(By.CLASS_NAME, locator)
+        elif find_method.upper() == 'ID':
+            wait.until(EC.visibility_of_element_located((By.ID, locator)))
+            return self.driver.find_element(By.ID, locator)
+        else:
+            raise Exception("Can't find such finding method.")
+
     def wait_for_element_to_appear(self, element_data):
         wait = WebDriverWait(self.driver, 15)
         find_method = element_data[0]
@@ -46,16 +65,16 @@ class BasePage():
     def wait_for_element_with_pasted_data_to_appear(self, element_data, pasted_data):
         wait = WebDriverWait(self.driver, 15)
         find_method = element_data[0]
-        locator = element_data[1]
+        locator = element_data[1].format(pasted_data)
         if find_method.upper() == 'XPATH':
             return wait.until(EC.visibility_of_element_located(
                 (By.XPATH, locator.format(pasted_data))))
         elif find_method.upper() == 'CSS_SELECTOR':
-            return wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, locator.format(pasted_data))))
+            return wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, locator)))
         elif find_method.upper() == 'CLASS_NAME':
-            return wait.until(EC.visibility_of_element_located((By.CLASS_NAME, locator.format(pasted_data))))
+            return wait.until(EC.visibility_of_element_located((By.CLASS_NAME, locator)))
         elif find_method.upper() == 'ID':
-            return wait.until(EC.visibility_of_element_located((By.ID, locator.format(pasted_data))))
+            return wait.until(EC.visibility_of_element_located((By.ID, locator)))
         else:
             raise Exception("Can't find such finding method.")
 
@@ -74,8 +93,8 @@ class BasePage():
         else:
             raise Exception("Can't find such finding method.")
 
-    def click(self, element):
-        elem = self.find(element)
+    def click(self, element_data):
+        elem = self.find(element_data)
         elem.click()
 
     def type_text(self, element, text):

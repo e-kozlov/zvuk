@@ -35,3 +35,15 @@ class SearchField(BasePage):
 
     def wait_for_album_to_appear(self, album):
         self.wait_for_element_with_pasted_data_to_appear(self.album, album)
+
+    def click_on_artist(self, artist):
+        element = self.find_element_with_pasted_data(self.artist, artist)
+        element.click()
+
+    def click_on_track(self, track):
+        element = self.find_element_with_pasted_data(self.track, track)
+        element.click()
+
+    def click_on_album(self, album):
+        element = self.find_element_with_pasted_data(self.album, album)
+        element.click()
